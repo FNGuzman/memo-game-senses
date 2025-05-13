@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import MemoryCard from './components/MemoryCard';
+import { useRouter } from 'next/navigation';
 
 const SENTIDOS = [
   { id: 1, image: '/assets/img/lavista2.png', name: 'Vista' },
@@ -28,10 +29,19 @@ export default function Home() {
   const flipAudio = useRef<HTMLAudioElement | null>(null);
   const checkAudio = useRef<HTMLAudioElement | null>(null);
   const errorAudio = useRef<HTMLAudioElement | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     startPreview();
   }, []);
+
+  useEffect(() => {
+    if (gameComplete) {
+      setTimeout(() => {
+        router.push('/conclusion');
+      }, 2000);
+    }
+  }, [gameComplete, router]);
 
   const startPreview = () => {
     const duplicatedCards = [...SENTIDOS, ...SENTIDOS]

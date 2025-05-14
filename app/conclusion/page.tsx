@@ -111,11 +111,7 @@ export default function Conclusion() {
                         Volver al inicio
                     </button>
                 </Link>
-                <Link href="/game">
-                    <button className="bg-[#89b48c] text-white py-2 px-6 rounded-lg hover:bg-[#78a37b] transition duration-300">
-                        Volver al juego
-                    </button>
-                </Link>
+
             </div>
         </div>
     );

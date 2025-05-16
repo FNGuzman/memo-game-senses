@@ -12,7 +12,7 @@ export default function MemoryCard({ image, isFlipped, isMatched, onClick }: Mem
     // Si está en coincidencia, forzar que se vea solo la imagen del sentido
     if (isMatched) {
         return (
-            <div className="relative w-24 h-24 sm:w-32 sm:h-32 opacity-50">
+            <div className="relative aspect-square w-full max-w-24 sm:max-w-32 md:max-w-56 lg:max-w-64 opacity-50">
                 <Image
                     src={image.replace('/app', '')}
                     alt="Imagen del sentido"
@@ -25,7 +25,7 @@ export default function MemoryCard({ image, isFlipped, isMatched, onClick }: Mem
     const showFront = isFlipped;
     return (
         <div
-            className={`relative w-24 h-24 sm:w-32 sm:h-32 cursor-pointer transition-transform duration-500 transform-style-3d perspective-1000 ${showFront ? 'rotate-y-180' : ''}`}
+            className={`relative aspect-square w-full max-w-24 sm:max-w-32 md:max-w-56 lg:max-w-64 cursor-pointer transition-transform duration-500 transform-style-3d perspective-1000 ${showFront ? 'rotate-y-180' : ''}`}
             onClick={onClick}
         >
             <div className="absolute w-full h-full backface-hidden">

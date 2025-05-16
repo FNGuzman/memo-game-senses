@@ -141,16 +141,49 @@ export default function Home() {
       )}
 
       <main className="flex-1 w-full flex items-center justify-center">
-        <div className="grid grid-cols-2 gap-4 w-full max-w-xs mx-auto px-2">
-          {cards.map((card, index) => (
-            <MemoryCard
-              key={card.uniqueId}
-              image={card.image}
-              isFlipped={card.isFlipped}
-              isMatched={card.isMatched}
-              onClick={() => handleCardClick(index)}
-            />
-          ))}
+        {/* Flex responsivo: 5 filas de 2 en móvil, 2 filas de 5 en md+ */}
+        <div className="flex flex-col gap-2 md:gap-4 lg:gap-10 w-full max-w-xs md:max-w-4xl mx-auto px-2 md:gap-y-8">
+          {/* Móvil: 5 filas de 2 cartas */}
+          <div className="block md:hidden">
+            {[0, 1, 2, 3, 4].map(fila => (
+              <div key={fila} className="flex flex-row justify-center gap-2 mb-2">
+                {cards.slice(fila * 2, fila * 2 + 2).map((card, idx) => (
+                  <MemoryCard
+                    key={card.uniqueId}
+                    image={card.image}
+                    isFlipped={card.isFlipped}
+                    isMatched={card.isMatched}
+                    onClick={() => handleCardClick(fila * 2 + idx)}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+          {/* Desktop/Tablet: 2 filas de 5 cartas */}
+          <div className="hidden md:block">
+            <div className="flex flex-row justify-center gap-4 lg:gap-10 mb-4">
+              {cards.slice(0, 5).map((card, index) => (
+                <MemoryCard
+                  key={card.uniqueId}
+                  image={card.image}
+                  isFlipped={card.isFlipped}
+                  isMatched={card.isMatched}
+                  onClick={() => handleCardClick(index)}
+                />
+              ))}
+            </div>
+            <div className="flex flex-row justify-center gap-4 lg:gap-10">
+              {cards.slice(5, 10).map((card, index) => (
+                <MemoryCard
+                  key={card.uniqueId}
+                  image={card.image}
+                  isFlipped={card.isFlipped}
+                  isMatched={card.isMatched}
+                  onClick={() => handleCardClick(index + 5)}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </main>
     </div>
